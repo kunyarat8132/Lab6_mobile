@@ -57,7 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public List<Student> getAllStudents(){
-        List<Student> student = new ArrayList<>();
+        List<Student> students = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM " + Student.TABLE_NAME;
 
@@ -69,12 +69,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 Student student = new Student();
                 student.setId(cursor.getString(cursor.getColumnIndex(Student.COLUMN_ID)));
                 student.setName(cursor.getString(cursor.getColumnIndex(Student.COLUMN_NAME)));
-                student.add(student);
+                students.add(student);
 
             }while (cursor.moveToNext());
         }
         db.close();
-        return student;
+        return students;
     }
 
 
