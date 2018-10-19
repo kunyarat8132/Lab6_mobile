@@ -56,11 +56,24 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return student;
     }
 
-    public List<Student> getAllStudent(){
+    public List<Student> getAllStudents(){
         List<Student> student = new ArrayList<>();
 
-        
+        String selectQuery = "SELECT * FROM " + Student.TABLE_NAME;
 
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery,null);
+
+        if (cursor.moveToFirst()){
+            do {
+                Student student = new Student();
+                student.setId(cursor.getString(cursor.getColumnIndex(Student.COLUMN_ID)));
+                student.setName(cursor.getString(cursor.getColumnIndex(Student.COLUMN_NAME)));
+                student.add(student);
+
+            }while (cursor.moveToNext());
+        }
+        db.close();
         return student;
     }
 
